@@ -1,6 +1,6 @@
 "use client";
 
-import { QrCode } from "lucide-react";
+import { HiOutlineQrCode } from "react-icons/hi2";
 import OutlineButton from "@/components/ui/Button/OutlineButton";
 import { useQrScanner } from "@/hook/useQrScanner";
 
@@ -18,7 +18,7 @@ function StudentQrScannerModal({ onScan, onClose }: Props) {
         <div className="pointer-events-none absolute -right-5 -top-5 h-20 w-20 rounded-full bg-[#EEB541]/25 blur-2xl" />
         <div className="mb-4 text-center sm:mb-5">
           <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-[#EEB541]/25 text-[#3A72E3]">
-            <QrCode className="h-5 w-5" aria-hidden="true" />
+            <HiOutlineQrCode className="h-5 w-5" aria-hidden="true" />
           </div>
           <h2 className="text-xl font-black text-[#232852] sm:text-2xl">Scan QR Siswa</h2>
           <p className="mt-1 text-xs font-semibold text-[#232852]/55 sm:text-sm">

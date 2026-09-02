@@ -2,7 +2,7 @@
 
 import { SyntheticEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Sparkles } from "lucide-react";
+import { HiOutlineSparkles } from "react-icons/hi2";
 import { AppDispatch, RootState } from "@/redux/store";
 import { clearAuthMessage, loginWithPassword } from "@/redux/features/auth/authSlice";
 import { useRedirectAfterLogin } from "@/hook/useRedirectAfterLogin";
@@ -73,7 +73,7 @@ function StudentPasswordLoginForm() {
           <span className="inline-flex items-center justify-center gap-2">
             <span>{loading ? "Memverifikasi..." : "Masuk ke Dashboard"}</span>
             {!loading && (
-              <Sparkles
+              <HiOutlineSparkles
                 className="h-4 w-4 transition-transform group-hover:rotate-12"
                 aria-hidden="true"
               />

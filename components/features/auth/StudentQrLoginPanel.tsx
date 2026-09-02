@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Camera, QrCode, Sparkles } from "lucide-react";
+import { HiOutlineCamera, HiOutlineQrCode, HiOutlineSparkles } from "react-icons/hi2";
 import { AppDispatch, RootState } from "@/redux/store";
 import { clearAuthMessage, loginWithQr } from "@/redux/features/auth/authSlice";
 import { useRedirectAfterLogin } from "@/hook/useRedirectAfterLogin";
@@ -43,7 +43,7 @@ function StudentQrLoginPanel() {
       )}
 
       <div className="relative mt-2.5 overflow-hidden rounded-2xl border border-[#A4C1FD]/60 bg-[#EEF5FF]/75 p-2.5 sm:mt-4 sm:rounded-[2rem] sm:p-5">
-        <Sparkles
+        <HiOutlineSparkles
           className="pointer-events-none absolute right-2.5 top-2.5 h-3.5 w-3.5 text-[#EEB541]/70 sm:right-4 sm:top-4 sm:h-5 sm:w-5"
           aria-hidden="true"
         />
@@ -64,10 +64,10 @@ function StudentQrLoginPanel() {
           className="group mt-2.5 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border-b-4 border-[#232852] bg-[#3A72E3] px-2.5 py-2.5 text-[11px] font-black text-white shadow-[0_8px_0_rgba(35,40,82,0.12)] transition duration-200 hover:scale-[1.02] hover:bg-[#3269D4] active:translate-y-1 active:border-b-0 active:shadow-none disabled:cursor-not-allowed disabled:opacity-60 sm:mt-4 sm:min-h-16 sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3.5 sm:text-base"
         >
           <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EEB541] text-[#232852] shadow-inner sm:h-10 sm:w-10">
-            <QrCode className="h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
+            <HiOutlineQrCode className="h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
           </span>
           <span>Scan QR Siswa</span>
-          <Camera className="h-3.5 w-3.5 opacity-90 sm:h-5 sm:w-5" aria-hidden="true" />
+          <HiOutlineCamera className="h-3.5 w-3.5 opacity-90 sm:h-5 sm:w-5" aria-hidden="true" />
         </button>
       </div>
 

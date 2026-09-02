@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, LockKeyhole } from "lucide-react";
+import { HiOutlineEye, HiOutlineEyeSlash, HiOutlineLockClosed } from "react-icons/hi2";
 
 interface Props {
   id: string;
@@ -20,13 +20,13 @@ function PasswordField({ id, name, label, placeholder, value, autoComplete, onCh
     <div>
       <label
         htmlFor={id}
-        className="block text-xs font-black uppercase tracking-wider text-[#232852]"
+        className="block text-[10px] font-black uppercase tracking-wider text-[#232852] sm:text-xs"
       >
         {label}
       </label>
-      <div className="relative mt-2">
-        <LockKeyhole
-          className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 sm:h-5 sm:w-5"
+      <div className="relative mt-1.5 sm:mt-2">
+        <HiOutlineLockClosed
+          className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 sm:left-4 sm:h-5 sm:w-5"
           aria-hidden="true"
         />
         <input
@@ -38,15 +38,15 @@ function PasswordField({ id, name, label, placeholder, value, autoComplete, onCh
           autoComplete={autoComplete}
           onChange={onChange}
           required
-          className="w-full rounded-2xl border-2 border-slate-200 bg-white py-3.5 pl-11 pr-12 text-sm font-semibold text-[#232852] outline-none transition-all placeholder:text-slate-400 focus:border-[#3A72E3] focus:ring-4 focus:ring-[#3A72E3]/20 sm:py-4"
+          className="w-full rounded-xl border-2 border-slate-200 bg-white py-3 pl-10 pr-11 text-sm font-semibold text-[#232852] outline-none transition-all placeholder:text-slate-400 focus:border-[#3A72E3] focus:ring-4 focus:ring-[#3A72E3]/20 sm:rounded-2xl sm:py-4 sm:pl-11 sm:pr-12"
         />
         <button
           type="button"
           onClick={() => setVisible((prev) => !prev)}
           aria-label={visible ? "Sembunyikan password" : "Tampilkan password"}
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl p-2 text-slate-400 transition hover:bg-[#A4C1FD]/15 hover:text-[#3A72E3] focus:outline-none focus:ring-2 focus:ring-[#3A72E3]/20"
+          className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-xl p-1.5 text-slate-400 transition hover:bg-[#A4C1FD]/15 hover:text-[#3A72E3] focus:outline-none focus:ring-2 focus:ring-[#3A72E3]/20 sm:right-2 sm:p-2"
         >
-          {visible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+          {visible ? <HiOutlineEyeSlash className="h-4 w-4 sm:h-5 sm:w-5" /> : <HiOutlineEye className="h-4 w-4 sm:h-5 sm:w-5" />}
         </button>
       </div>
     </div>

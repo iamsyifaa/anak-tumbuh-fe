@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { KeyRound, QrCode } from "lucide-react";
+import { HiOutlineKey, HiOutlineQrCode } from "react-icons/hi2";
 import BrandHeader from "@/components/common/BrandHeader";
 import StudentQrLoginPanel from "./StudentQrLoginPanel";
 import StudentPasswordLoginForm from "./StudentPasswordLoginForm";
 
 type LoginMethod = "qr" | "password";
 
-const TABS: { key: LoginMethod; label: string; icon: typeof QrCode }[] = [
-  { key: "qr", label: "Scan QR", icon: QrCode },
-  { key: "password", label: "Password", icon: KeyRound },
+const TABS: { key: LoginMethod; label: string; icon: typeof HiOutlineQrCode }[] = [
+  { key: "qr", label: "Scan QR", icon: HiOutlineQrCode },
+  { key: "password", label: "Password", icon: HiOutlineKey },
 ];
 
 // Requirement doc section 8 normally restricts students to QR-only login
@@ -24,7 +24,7 @@ function StudentLoginTabs() {
       <BrandHeader />
       <p className="mx-auto mt-1.5 max-w-[13rem] text-center text-[10px] font-semibold leading-4 text-[#232852]/55 sm:mt-2 sm:max-w-sm sm:text-sm sm:leading-5">
         {method === "qr"
-          ? "Scan QR siswa untuk masuk ke anaktumbuh.id."
+          ? "Scan QR siswa untuk masuk ke aplikasi kebiasaanmu."
           : "Masuk dengan username dan password siswa kamu."}
       </p>
 

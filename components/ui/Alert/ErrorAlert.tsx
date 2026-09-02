@@ -7,7 +7,7 @@ function ErrorAlert({ message, onClose }: Props) {
   return (
     <div
       role="alert"
-      className="mt-5 flex items-start justify-between gap-3 rounded-2xl border border-red-100 bg-red-50 p-3 text-sm font-semibold text-red-700"
+      className="mt-3 flex items-start justify-between gap-2 rounded-xl border border-red-100 bg-red-50 p-2.5 text-[11px] font-semibold text-red-700 sm:mt-5 sm:gap-3 sm:rounded-2xl sm:p-3 sm:text-sm"
     >
       <span>{message}</span>
       {onClose && (
