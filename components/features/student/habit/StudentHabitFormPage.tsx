@@ -10,7 +10,7 @@ import StudentDashboardShell from "@/components/features/student/layout/StudentD
 import InfoNotice from "@/components/ui/feedback/InfoNotice";
 import OptionButton from "@/components/ui/form/OptionButton";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
-import SuccessModal from "@/components/ui/modal/SuccessModal";
+import SuccessModal from "@/components/ui/Modal/SuccessModal";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchStudentDashboard } from "@/redux/features/student/home/homeSlice";
 import {
