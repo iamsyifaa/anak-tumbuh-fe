@@ -54,6 +54,8 @@ function StudentQrLoginPanel() {
           </p>
         </div>
 
+        <p className="mb-2 text-center text-[9px] font-semibold text-[#232852]/45 sm:text-xs">QR demo tersedia: Jaehyun, Syifa, Ahmad.</p>
+
         <button
           type="button"
           onClick={() => {

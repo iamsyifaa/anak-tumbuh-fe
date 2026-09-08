@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./features/auth/authSlice";
+import auth from "./features/auth/authSlice";
+import studentHome from "./features/student/home/homeSlice";
+import studentHabit from "./features/student/habit/habitSlice";
+import studentRecap from "./features/student/recap/recapSlice";
+import studentLeaderboard from "./features/student/leaderboard/leaderboardSlice";
+import studentProfile from "./features/student/profile/profileSlice";
 
-const store = configureStore({
-  reducer: {
-    auth: authSlice,
-  },
-});
-
-export type AppDispatch = typeof store.dispatch;
+const store = configureStore({ reducer: { auth, studentHome, studentHabit, studentRecap, studentLeaderboard, studentProfile } });
 export type RootState = ReturnType<typeof store.getState>;
-
+export type AppDispatch = typeof store.dispatch;
 export default store;

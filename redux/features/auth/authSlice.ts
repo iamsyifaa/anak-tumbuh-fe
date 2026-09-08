@@ -28,13 +28,13 @@ export const loginWithPassword = createAsyncThunk<
   return response;
 });
 
-export const loginWithQr = createAsyncThunk<AuthApiResponse, { qrToken: string }>(
-  "auth/loginWithQr",
-  async ({ qrToken }) => {
-    const response = await loginWithQrApi(qrToken);
-    return response;
-  }
-);
+export const loginWithQr = createAsyncThunk<
+  AuthApiResponse,
+  { qrToken: string }
+>("auth/loginWithQr", async ({ qrToken }) => {
+  const response = await loginWithQrApi(qrToken);
+  return response;
+});
 
 const authSlice = createSlice({
   name: "auth",
@@ -66,9 +66,17 @@ const authSlice = createSlice({
           state.loading = false;
           state.code = action.payload.code;
           state.message = action.payload.message;
-          state.user = action.payload.data;
-          state.accessToken = action.payload.access_token;
-        }
+          if (action.payload.code === 200) {
+            state.error = null;
+            state.user = action.payload.data;
+            state.accessToken = action.payload.access_token;
+          } else {
+            state.error =
+              action.payload.message || "Username atau password salah.";
+            state.user = null;
+            state.accessToken = "";
+          }
+        },
       )
       .addCase(loginWithPassword.rejected, (state, action) => {
         state.loading = false;
@@ -85,9 +93,16 @@ const authSlice = createSlice({
           state.loading = false;
           state.code = action.payload.code;
           state.message = action.payload.message;
-          state.user = action.payload.data;
-          state.accessToken = action.payload.access_token;
-        }
+          if (action.payload.code === 200) {
+            state.error = null;
+            state.user = action.payload.data;
+            state.accessToken = action.payload.access_token;
+          } else {
+            state.error = action.payload.message || "QR Code tidak valid.";
+            state.user = null;
+            state.accessToken = "";
+          }
+        },
       )
       .addCase(loginWithQr.rejected, (state, action) => {
         state.loading = false;

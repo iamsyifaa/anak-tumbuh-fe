@@ -7,13 +7,11 @@ export const metadata: Metadata = {
   description: "Login siswa menggunakan scan QR atau username & password.",
 };
 
-const StudentLoginPage = () => {
-  return (
-    <div className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-[#A4C1FD] via-white to-[#EEF5FF] px-4 py-20 sm:px-6 sm:py-24">
-      <AuthBackdrop />
-      <StudentLoginTabs />
-    </div>
-  );
-};
+const StudentLoginPage = () => (
+  <div className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-[#A4C1FD] via-white to-[#EEF5FF] px-4 py-20 sm:px-6 sm:py-24">
+    <AuthBackdrop />
+    <StudentLoginTabs />
+  </div>
+);
 
 export default StudentLoginPage;
