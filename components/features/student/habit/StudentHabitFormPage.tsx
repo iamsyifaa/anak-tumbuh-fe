@@ -134,21 +134,11 @@ function StudentHabitFormPage({ habitId }: Props) {
                           .split(", ")
                           .filter(Boolean);
                         const selected = selectedOptions.includes(option);
-                        // Requirement doc bagian 4.5: opsi terakhir Bermasyarakat
-                        // ("Kurang bermasyarakat") berdiri sendiri — begitu
-                        // dipilih, opsi lain ikut kehapus, dan sebaliknya.
-                        const exclusiveOption = field.options?.[field.options.length - 1];
-                        const isExclusiveOption = option === exclusiveOption && isMultiSelect;
-                        const nextValue = (() => {
-                          if (!isMultiSelect) return option;
-                          if (isExclusiveOption) return selected ? "" : option;
-                          const withoutExclusive = selectedOptions.filter(
-                            (value) => value !== exclusiveOption,
-                          );
-                          return selected
-                            ? withoutExclusive.filter((value) => value !== option).join(", ")
-                            : [...withoutExclusive, option].join(", ");
-                        })();
+                        const nextValue = selected
+                          ? selectedOptions
+                              .filter((value) => value !== option)
+                              .join(", ")
+                          : [...selectedOptions, option].join(", ");
 
                         return (
                           <OptionButton
@@ -163,7 +153,7 @@ function StudentHabitFormPage({ habitId }: Props) {
                               dispatch(
                                 setHabitValue({
                                   fieldId: field.id,
-                                  value: nextValue,
+                                  value: isMultiSelect ? nextValue : option,
                                 }),
                               )
                             }

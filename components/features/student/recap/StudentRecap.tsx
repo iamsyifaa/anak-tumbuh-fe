@@ -13,6 +13,7 @@ function StudentRecapContent() {
   const [draftDate, setDraftDate] = useState(selectedDate);
 
   useEffect(() => { if (!data) dispatch(fetchRecap(selectedDate)); }, [dispatch, data, selectedDate]);
+  useEffect(() => setDraftDate(selectedDate), [selectedDate]);
 
   const applyDate = () => {
     dispatch(setSelectedDate(draftDate));

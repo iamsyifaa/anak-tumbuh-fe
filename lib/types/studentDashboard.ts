@@ -10,7 +10,7 @@ export type HabitId =
 export interface StudentSummary {
   id: string;
   name: string;
-  nisn: string;
+  nissn: string;
   className: string;
   schoolName: string;
   avatarUrl: string;
