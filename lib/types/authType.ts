@@ -8,10 +8,7 @@ export interface AuthenticatedUser {
   username: string;
   role: UserRole;
   schoolId?: string;
-  schoolName?: string;
   classGroupId?: string;
-  className?: string;
-  nisn?: string;
   avatarUrl?: string;
 }
 

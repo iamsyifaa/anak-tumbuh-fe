@@ -36,7 +36,7 @@ function StudentProfileContent() {
   const { student } = data;
   const rows = [
     ["Nama Lengkap", student.name],
-    ["Nomor Induk Siswa Nasional (NISN)", student.nissn],
+    ["Nomor Induk Siswa Nasional (NISN)", student.nisn],
     ["Kelas & Rombel", student.className],
     ["Asal Sekolah", student.schoolName],
   ];

@@ -15,7 +15,7 @@ import { formatIndonesianDate, getLocalDateKey } from "@/lib/utils/date";
 const student = {
   id: "student-001",
   name: "Jaehyun",
-  nissn: "0987654321",
+  nisn: "0987654321",
   className: "B1",
   schoolName: "TK Baiturrahman 3",
   avatarUrl: "/assets/student/boy-avatar.png",
@@ -65,12 +65,12 @@ const fieldsByHabit: Record<HabitId, HabitFormResponse["fields"]> = {
     { id: "note", label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)", helper: "Ceritakan pengalamanmu hari ini...", kind: "textarea", optional: true, maxLength: 1000 },
   ],
   community: [
-    { id: "activity", label: "1. PILIHAN", helper: "Kegiatan bermasyarakat yang kamu lakukan.", kind: "choice", options: ["Membantu keluarga atau lingkungan", "Bermain dan bekerja sama dengan teman", "Mengikuti kegiatan bersama", "Belum melakukan kegiatan"] },
+    { id: "activity", label: "1. PILIHAN", helper: "Kegiatan bermasyarakat yang kamu lakukan (bisa pilih lebih dari satu).", kind: "choice", options: ["Membereskan tempat tidur dan kebersihan rumah", "Membantu pekerjaan orang tua", "Bermain bersama teman sebaya", "Kurang bermasyarakat"] },
     { id: "initiative", label: "2. INISIATIF", helper: "Siapa yang mengingatkan kegiatan tersebut?", kind: "choice", options: ["Sadar sendiri", "Disuruh"] },
     { id: "note", label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)", helper: "Ceritakan pengalamanmu hari ini...", kind: "textarea", optional: true, maxLength: 1000 },
   ],
   "early-sleep": [
-    { id: "sleep_time", label: "1. PILIHAN", helper: "Waktu tidur siswa.", kind: "choice", options: ["Sebelum jam 08.00", "Jam 08.00–09.00", "Jam 07.00–10.00", "Di atas jam 10.00"] },
+    { id: "sleep_time", label: "1. PILIHAN", helper: "Waktu tidur siswa.", kind: "choice", options: ["Sebelum jam 20.00", "Jam 20.00–21.00", "Jam 21.00–22.00", "Di atas jam 22.00"] },
     { id: "initiative", label: "2. INISIATIF", helper: "Siapa yang mengingatkan kegiatan tersebut?", kind: "choice", options: ["Sadar sendiri", "Disuruh"] },
     { id: "note", label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)", helper: "Ceritakan pengalamanmu hari ini...", kind: "textarea", optional: true, maxLength: 1000 },
   ],
@@ -90,11 +90,11 @@ const recapItems = [
   { id: "r1", habitId: "healthy-food" as HabitId, title: "Makanan sehat dan bergizi", category: "Gizi & Pola Makan", dateKey: "2026-08-26", dateLabel: "26 Agustus 2026", choice: "Beragam Makanan Sehat", initiative: "sadar sendiri", note: "ayam goreng", pointsAwarded: 20, completed: true },
   { id: "r2", habitId: "wake-up" as HabitId, title: "Bangun pagi", category: "Kedisiplinan Waktu", dateKey: "2026-08-26", dateLabel: "26 Agustus 2026", choice: "sebelum pukul 4", initiative: "disuruh", note: "Tidak ada", pointsAwarded: 15, completed: true },
   { id: "r3", habitId: "prayer" as HabitId, title: "Beribadah tepat waktu", category: "Spiritual & Karakter", dateKey: "2026-08-26", dateLabel: "26 Agustus 2026", choice: "Sholat Subuh di Masjid", initiative: "sadar sendiri", note: "berjamaah bersama ayah", pointsAwarded: 25, completed: true },
-  { id: "r4", habitId: "community" as HabitId, title: "Membantu orang tua", category: "Baik hati & Kemandirian", dateKey: "2026-08-26", dateLabel: "26 Agustus 2026", choice: "Merapikan tempat tidur", initiative: "sadar sendiri", note: "melipat selimut rapi", pointsAwarded: 20, completed: true },
+  { id: "r4", habitId: "community" as HabitId, title: "Membantu orang tua", category: "Baik hati & Kemandirian", dateKey: "2026-08-26", dateLabel: "26 Agustus 2026", choice: "Membereskan tempat tidur dan kebersihan rumah", initiative: "sadar sendiri", note: "melipat selimut rapi", pointsAwarded: 20, completed: true },
   { id: "r5", habitId: "sports" as HabitId, title: "Berolahraga", category: "Kesehatan", dateKey: "2026-08-27", dateLabel: "27 Agustus 2026", choice: "45 menit sampai 1 jam", initiative: "sadar sendiri", note: "bersepeda sore", pointsAwarded: 20, completed: true },
   { id: "r6", habitId: "reading" as HabitId, title: "Gemar belajar", category: "Pendidikan", dateKey: "2026-08-27", dateLabel: "27 Agustus 2026", choice: "Di atas 1 jam", initiative: "sadar sendiri", note: "membaca buku cerita", pointsAwarded: 20, completed: true },
-  { id: "r7", habitId: "early-sleep" as HabitId, title: "Tidur cepat", category: "Kedisiplinan Waktu", dateKey: "2026-08-30", dateLabel: "30 Agustus 2026", choice: "Sebelum jam 08.00", initiative: "disuruh", note: "tidur lebih awal", pointsAwarded: 15, completed: true },
-  { id: "r8", habitId: "community" as HabitId, title: "Bermasyarakat", category: "Sosial", dateKey: "2026-08-30", dateLabel: "30 Agustus 2026", choice: "Mengikuti kegiatan bersama", initiative: "sadar sendiri", note: "gotong royong", pointsAwarded: 20, completed: true },
+  { id: "r7", habitId: "early-sleep" as HabitId, title: "Tidur cepat", category: "Kedisiplinan Waktu", dateKey: "2026-08-30", dateLabel: "30 Agustus 2026", choice: "Sebelum jam 20.00", initiative: "disuruh", note: "tidur lebih awal", pointsAwarded: 15, completed: true },
+  { id: "r8", habitId: "community" as HabitId, title: "Bermasyarakat", category: "Sosial", dateKey: "2026-08-30", dateLabel: "30 Agustus 2026", choice: "Bermain bersama teman sebaya", initiative: "sadar sendiri", note: "gotong royong", pointsAwarded: 20, completed: true },
 ];
 
 type MockLeaderboard = LeaderboardResponse;
