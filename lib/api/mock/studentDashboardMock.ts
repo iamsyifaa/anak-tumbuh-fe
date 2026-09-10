@@ -254,7 +254,8 @@ const fieldsByHabit: Record<HabitId, HabitFormResponse["fields"]> = {
     {
       id: "activity",
       label: "1. PILIHAN",
-      helper: "Kegiatan bermasyarakat yang kamu lakukan.",
+      helper:
+        "Kegiatan bermasyarakat yang kamu lakukan (isi lebih dari satu jika perlu)",
       kind: "choice",
       options: [
         "Membantu keluarga atau lingkungan",
