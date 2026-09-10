@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { HiOutlineStar } from "react-icons/hi2";
+import { HiOutlineStar, HiStar } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import StudentDashboardShell from "@/components/features/student/layout/StudentDashboardShell";
 import {
@@ -143,9 +143,9 @@ function StudentLeaderboardContent() {
                     </div>
                     <div className="border-l border-slate-200 px-1 py-1.5 text-[#F59E0B]">
                       <span className="block uppercase tracking-[0.12em] text-[7px] text-slate-400">
-                        Streak
+                        Level
                       </span>
-                      <span className="mt-0.5 block">{entry.streak}</span>
+                      <span className="mt-0.5 block">{entry.level}</span>
                     </div>
                   </div>
                 </div>
@@ -189,8 +189,8 @@ function StudentLeaderboardContent() {
                 <HiOutlineStar className="h-3 w-3 text-[#2F6FED]" />{" "}
                 {entry.points.toLocaleString("id-ID")} POIN
               </span>
-              <span className="text-[9px] font-bold text-orange-500">
-                {entry.streak} Streak 🔥
+              <span className="text-[9px] font-black text-amber-500 flex items-center gap-1">
+                <HiStar className="h-3 w-3" /> {entry.level}
               </span>
             </div>
           ))}

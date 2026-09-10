@@ -105,7 +105,7 @@ export interface LeaderboardEntry {
   className: string;
   avatarUrl: string;
   points: number;
-  streak: number;
+  level: number;
 }
 
 export type LeaderboardScope = "class" | "grade";

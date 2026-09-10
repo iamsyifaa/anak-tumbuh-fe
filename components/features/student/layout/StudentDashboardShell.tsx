@@ -36,8 +36,8 @@ export default function StudentDashboardShell({
   const pathname = usePathname();
   const user = useSelector((state: RootState) => state.auth.user);
 
-  const displayName = user?.name ?? "Jaehyun";
-  const avatar = user?.avatarUrl ?? "/assets/student/boy-avatar.png";
+  const displayName = user?.name ?? "Syifa";
+  const avatar = user?.avatarUrl ?? "/assets/student/girl-avatar.png";
 
   const isActive = (href: string, exact?: boolean) =>
     exact ? pathname === href : pathname.startsWith(href);
