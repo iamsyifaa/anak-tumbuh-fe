@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { HiOutlineStar, HiStar } from "react-icons/hi2";
+import { HiCircleStack, HiStar } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import StudentDashboardShell from "@/components/features/student/layout/StudentDashboardShell";
 import {
@@ -185,13 +185,15 @@ function StudentLeaderboardContent() {
                 <p className="truncate text-[10px] font-black">{entry.name}</p>
                 <p className="text-[8px] text-slate-400">{entry.className}</p>
               </div>
-              <span className="hidden items-center gap-1 text-[9px] font-black sm:flex">
-                <HiOutlineStar className="h-3 w-3 text-[#2F6FED]" />{" "}
-                {entry.points.toLocaleString("id-ID")} POIN
-              </span>
-              <span className="text-[9px] font-black text-amber-500 flex items-center gap-1">
-                <HiStar className="h-3 w-3" /> {entry.level}
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1 text-[9px] font-black text-[#2F6FED]">
+                  <HiCircleStack className="h-3 w-3" />
+                  {entry.points.toLocaleString("id-ID")}
+                </span>
+                <span className="flex items-center gap-1 text-[9px] font-black text-amber-500">
+                  <HiStar className="h-3 w-3" /> {entry.level}
+                </span>
+              </div>
             </div>
           ))}
           {rest.length === 0 && (
