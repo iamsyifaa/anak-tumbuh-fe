@@ -18,7 +18,7 @@ const student = {
   nissn: "0987654321",
   className: "B1",
   schoolName: "TK Baiturrahman 3",
-  avatarUrl: "/assets/student/boy-avatar.png",
+  avatarUrl: "/assets/student/girl-avatar.png",
   points: 1620,
   exp: 1520,
   level: 4,
