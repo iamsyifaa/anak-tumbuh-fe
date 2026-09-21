@@ -20,7 +20,7 @@ function PasswordField({ id, name, label, placeholder, value, autoComplete, onCh
     <div>
       <label
         htmlFor={id}
-        className="block text-[10px] font-black uppercase tracking-wider text-[#232852] sm:text-xs"
+        className="block text-sm font-black uppercase tracking-wider text-[#232852] sm:text-sm"
       >
         {label}
       </label>
@@ -38,7 +38,7 @@ function PasswordField({ id, name, label, placeholder, value, autoComplete, onCh
           autoComplete={autoComplete}
           onChange={onChange}
           required
-          className="w-full rounded-xl border-2 border-slate-200 bg-white py-3 pl-10 pr-11 text-sm font-semibold text-[#232852] outline-none transition-all placeholder:text-slate-400 focus:border-[#3A72E3] focus:ring-4 focus:ring-[#3A72E3]/20 sm:rounded-2xl sm:py-4 sm:pl-11 sm:pr-12"
+          className="w-full rounded-xl border-2 border-slate-200 bg-white py-3 pl-10 pr-11 text-base font-semibold text-[#232852] outline-none transition-all placeholder:text-slate-400 focus:border-[#3A72E3] focus:ring-4 focus:ring-[#3A72E3]/20 sm:rounded-2xl sm:py-4 sm:pl-11 sm:pr-12"
         />
         <button
           type="button"

@@ -21,13 +21,13 @@ function StudentHomeContent() {
 
   if (loading && !data)
     return (
-      <div className="grid min-h-[60vh] place-items-center text-sm font-bold text-slate-500">
+      <div className="grid min-h-[60vh] place-items-center text-base font-bold text-slate-500">
         Memuat beranda...
       </div>
     );
   if (error && !data)
     return (
-      <div className="rounded-2xl bg-white p-6 text-sm font-bold text-red-600">
+      <div className="rounded-2xl bg-white p-6 text-base font-bold text-red-600">
         {error}
       </div>
     );
@@ -40,18 +40,18 @@ function StudentHomeContent() {
       <section className="grid grid-cols-2 gap-3">
         <div className="flex min-h-[180px] items-center justify-center rounded-3xl border border-[#E8ECF5] bg-white p-3 text-center shadow-[0_8px_24px_rgba(23,32,78,0.05)] sm:p-5">
           <div className="flex w-full flex-col items-center justify-center">
-            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-[#E2E9FF] bg-[#F4F7FF] text-2xl font-black text-[#17204E] sm:h-16 sm:w-16 sm:text-3xl">
+            <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-[#E2E9FF] bg-[#F4F7FF] text-3xl font-black text-[#17204E] sm:h-16 sm:w-16 sm:text-3xl">
               {completed}
             </div>
 
             <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#3B65C9]">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#3B65C9]">
                 Ringkasan Hari Ini
               </p>
-              <p className="mt-2 text-[10px] leading-4 text-slate-500 sm:text-[12px] sm:leading-5">
+              <p className="mt-2 text-sm leading-4 text-slate-500 sm:text-base sm:leading-5">
                 Mulai isi kebiasaanmu untuk mendapatkan poin pertama.
               </p>
-              <p className="mt-2 text-[11px] font-black text-[#F2A814] sm:text-[12px]">
+              <p className="mt-2 text-sm font-black text-[#F2A814] sm:text-base">
                 Tetap semangat!
               </p>
             </div>
@@ -67,11 +67,11 @@ function StudentHomeContent() {
               height={54}
               className="h-12 w-12 object-contain"
             />
-            <p className="mt-1 text-[10px] font-bold text-[#3B65C9]">
+            <p className="mt-1 text-sm font-bold text-[#3B65C9]">
               PENGUATAN POSITIF
             </p>
-            <p className="mt-1 text-sm font-black">Kamu hebat hari ini!</p>
-            <p className="mt-0.5 max-w-md text-[10px] text-slate-500">
+            <p className="mt-1 text-base font-black">Kamu hebat hari ini!</p>
+            <p className="mt-0.5 max-w-md text-sm text-slate-500">
               {completed} dari 7 kebiasaan tercatat hari ini. Setiap langkah
               kecil sangat berharga.
             </p>
@@ -82,16 +82,16 @@ function StudentHomeContent() {
       <section>
         <div className="mb-3 flex items-end justify-between">
           <div>
-            <p className="text-[9px] font-black uppercase tracking-wide text-[#2F6FED]">
+            <p className="text-sm font-black uppercase tracking-wide text-[#2F6FED]">
               {formatIndonesianDate()}
             </p>
-            <h2 className="mt-1 text-lg font-black sm:text-xl">
+            <h2 className="mt-1 text-xl font-black sm:text-2xl">
               Isi Kebiasaanmu
             </h2>
           </div>
           <Link
             href="/dashboard/student/recap"
-            className="text-[10px] font-bold text-[#2F6FED]"
+            className="text-sm font-bold text-[#2F6FED]"
           >
             Lihat rekap
           </Link>
@@ -106,11 +106,11 @@ function StudentHomeContent() {
               className={`group rounded-2xl border border-white p-2.5 shadow-[0_5px_20px_rgba(23,32,78,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_9px_24px_rgba(47,111,237,0.14)] ${habit.accent}`}
             >
               <div className="flex items-center justify-between">
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-white/90 text-[9px] font-black text-slate-500">
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-white/90 text-sm font-black text-slate-500">
                   {habit.order}
                 </span>
                 {habit.completed && (
-                  <span className="text-[9px] font-black text-emerald-600">
+                  <span className="text-sm font-black text-emerald-600">
                     ✓ selesai
                   </span>
                 )}
@@ -125,10 +125,10 @@ function StudentHomeContent() {
                 />
               </div>
               <div className="rounded-xl bg-white/90 p-2.5">
-                <p className="text-[10px] font-black leading-4 sm:text-xs">
+                <p className="text-sm font-black leading-4 sm:text-sm">
                   {habit.shortTitle}
                 </p>
-                <div className="mt-1 flex items-center justify-between text-[9px] font-bold text-[#2F6FED]">
+                <div className="mt-1 flex items-center justify-between text-sm font-bold text-[#2F6FED]">
                   <span>
                     {habit.completed ? "Sudah tercatat" : "Isi sekarang"}
                   </span>

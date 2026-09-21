@@ -32,7 +32,13 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const realStudentDashboardApi: StudentDashboardApi = {
   getDashboard: () => request(ENDPOINTS.dashboard),
-  getHabitForm: (habitId) => request(ENDPOINTS.habit(habitId)),
+  getHabitForm: async (habitId) => {
+    const raw = await request<Record<string, unknown>>(ENDPOINTS.habit(habitId));
+    // Backend Laravel mengirim field ini dengan nama `panduan_teks` (diisi
+    // wali kelas lewat Rich Text Editor). Dipetakan ke `guideHtml` di sini
+    // supaya komponen presentasi cuma kenal satu nama field yang konsisten.
+    return { ...raw, guideHtml: raw.panduan_teks ?? raw.guideHtml } as never;
+  },
   submitHabit: (payload: SubmitHabitRequest) => request(ENDPOINTS.submitHabit(payload.habitId), { method: "POST", body: JSON.stringify({ values: payload.values }) }),
   getRecap: (dateKey) => request(`${ENDPOINTS.recap}${dateKey ? `?date=${encodeURIComponent(dateKey)}` : ""}`),
   getLeaderboard: (scope: LeaderboardScope = "class") => request(`${ENDPOINTS.leaderboard}?scope=${scope}`),

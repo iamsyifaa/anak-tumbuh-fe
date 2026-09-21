@@ -21,13 +21,13 @@ function StudentProfileContent() {
 
   if (loading && !data)
     return (
-      <div className="grid min-h-[60vh] place-items-center text-sm font-bold text-slate-500">
+      <div className="grid min-h-[60vh] place-items-center text-base font-bold text-slate-500">
         Memuat profil...
       </div>
     );
   if (error && !data)
     return (
-      <div className="rounded-2xl bg-white p-6 text-sm font-bold text-red-600">
+      <div className="rounded-2xl bg-white p-6 text-base font-bold text-red-600">
         {error}
       </div>
     );
@@ -36,7 +36,7 @@ function StudentProfileContent() {
   const { student } = data;
   const rows = [
     ["Nama Lengkap", student.name],
-    ["Nomor Induk Siswa Nasional (NISN)", student.nissn],
+    ["Nomor Induk Siswa Nasional (NISN)", student.nisn],
     ["Kelas & Rombel", student.className],
     ["Asal Sekolah", student.schoolName],
   ];
@@ -61,17 +61,17 @@ function StudentProfileContent() {
             height={110}
             className="mx-auto h-24 w-24 rounded-full object-cover ring-4 ring-[#DDEBFF] sm:h-28 sm:w-28"
           />
-          <h2 className="mt-3 text-xl font-black sm:text-2xl">
+          <h2 className="mt-3 text-2xl font-black sm:text-3xl">
             {student.name}
           </h2>
         </div>
         <div className="mx-auto mt-6 max-w-3xl divide-y divide-slate-200 rounded-2xl bg-white">
           {rows.map(([label, value]) => (
             <div key={label} className="px-4 py-3 sm:px-5">
-              <p className="text-[8px] font-bold uppercase text-slate-400 sm:text-[9px]">
+              <p className="text-xs font-bold uppercase text-slate-400 sm:text-sm">
                 {label}
               </p>
-              <p className="mt-1 text-[11px] font-semibold text-[#17204E] sm:text-xs">
+              <p className="mt-1 text-sm font-semibold text-[#17204E] sm:text-sm">
                 {value}
               </p>
             </div>

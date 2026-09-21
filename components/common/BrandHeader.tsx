@@ -13,10 +13,10 @@ function BrandHeader({ subtitle = "Akses Siswa" }: Props) {
         <HiOutlineShieldCheck className="h-4 w-4 sm:h-7 sm:w-7" aria-hidden="true" />
       </div>
 
-      <h1 className="mt-2.5 text-lg font-black tracking-tight text-[#232852] sm:mt-4 sm:text-3xl">
+      <h1 className="mt-2.5 text-xl font-black tracking-tight text-[#232852] sm:mt-4 sm:text-3xl">
         anaktumbuh.id
       </h1>
-      <p className="mt-0.5 text-[11px] font-semibold text-[#232852]/65 sm:mt-1 sm:text-base">
+      <p className="mt-0.5 text-sm font-semibold text-[#232852]/65 sm:mt-1 sm:text-lg">
         {subtitle}
       </p>
     </div>

@@ -16,3 +16,20 @@ html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
 button, input, textarea { font: inherit; }
 a { text-decoration: none; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes zoom-in {
+  from { opacity: 0; transform: scale(0.95) translateY(4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.18s ease-out; }
+.animate-zoom-in { animation: zoom-in 0.18s ease-out; }
+
+.guide-content p { margin: 0 0 10px; }
+.guide-content h4 { margin: 14px 0 6px; font-size: 13px; font-weight: 900; color: #17204E; text-transform: uppercase; letter-spacing: 0.04em; }
+.guide-content ul { margin: 0 0 10px; padding-left: 16px; list-style: disc; }
+.guide-content li { margin-bottom: 6px; }
+.guide-content strong { color: #17204E; font-weight: 800; }

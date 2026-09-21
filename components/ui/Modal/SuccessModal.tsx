@@ -16,9 +16,9 @@ function SuccessModal({ open, title, description, onClose }: Props) {
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-500">
           <HiOutlineCheckCircle className="h-9 w-9" />
         </div>
-        <h2 className="mt-4 text-xl font-black text-[#17204E]">{title}</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
-        <button onClick={onClose} className="mt-5 w-full rounded-xl bg-[#2F6FED] px-4 py-3 text-sm font-black text-white">Kembali ke kebiasaan</button>
+        <h2 className="mt-4 text-2xl font-black text-[#17204E]">{title}</h2>
+        <p className="mt-2 text-base leading-6 text-slate-500">{description}</p>
+        <button onClick={onClose} className="mt-5 w-full rounded-xl bg-[#2F6FED] px-4 py-3 text-base font-black text-white">Kembali ke kebiasaan</button>
       </div>
     </div>
   );

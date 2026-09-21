@@ -22,7 +22,7 @@ function PillTabSwitcher({ options, activeValue, onChange }: Props) {
             key={option.value}
             type="button"
             onClick={() => onChange(option.value)}
-            className={`rounded-xl py-2.5 text-xs font-black transition-all sm:text-sm ${
+            className={`rounded-xl py-2.5 text-sm font-black transition-all sm:text-base ${
               isActive
                 ? "bg-white text-[#3A72E3] shadow-[0_4px_14px_rgba(58,114,227,0.25)]"
                 : "text-[#232852]/55 hover:text-[#232852]"

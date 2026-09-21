@@ -10,7 +10,7 @@ type LoginMethod = "qr" | "password";
 
 const TABS: { key: LoginMethod; label: string; icon: typeof HiOutlineQrCode }[] = [
   { key: "qr", label: "Scan QR", icon: HiOutlineQrCode },
-  { key: "password", label: "Password", icon: HiOutlineKey },
+  { key: "password", label: "NISN", icon: HiOutlineKey },
 ];
 
 // Requirement doc section 8 normally restricts students to QR-only login
@@ -22,10 +22,10 @@ function StudentLoginTabs() {
   return (
     <div className="relative z-10 w-full max-w-[19rem] rounded-2xl border border-white/80 bg-white p-3.5 shadow-[0_24px_70px_rgba(164,193,253,0.45)] sm:max-w-lg sm:rounded-[2.5rem] sm:p-8 md:p-9">
       <BrandHeader />
-      <p className="mx-auto mt-1.5 max-w-[13rem] text-center text-[10px] font-semibold leading-4 text-[#232852]/55 sm:mt-2 sm:max-w-sm sm:text-sm sm:leading-5">
+      <p className="mx-auto mt-1.5 max-w-[13rem] text-center text-sm font-semibold leading-4 text-[#232852]/55 sm:mt-2 sm:max-w-sm sm:text-base sm:leading-5">
         {method === "qr"
           ? "Scan QR siswa untuk masuk ke aplikasi kebiasaanmu."
-          : "Masuk dengan username dan password siswa kamu."}
+          : "Masuk dengan username dan NISN siswa kamu."}
       </p>
 
       <div className="mt-3 grid grid-cols-2 gap-1 rounded-xl bg-[#EEF5FF] p-1 sm:mt-7 sm:gap-2 sm:rounded-2xl sm:p-1.5">
@@ -37,7 +37,7 @@ function StudentLoginTabs() {
               key={tab.key}
               type="button"
               onClick={() => setMethod(tab.key)}
-              className={`flex items-center justify-center gap-1 rounded-lg px-1.5 py-1.5 text-[10px] font-black transition sm:gap-2 sm:rounded-xl sm:px-3 sm:py-2.5 sm:text-sm ${
+              className={`flex items-center justify-center gap-1 rounded-lg px-1.5 py-1.5 text-sm font-black transition sm:gap-2 sm:rounded-xl sm:px-3 sm:py-2.5 sm:text-base ${
                 active
                   ? "bg-white text-[#3A72E3] shadow-sm"
                   : "text-[#232852]/50 hover:text-[#232852]"

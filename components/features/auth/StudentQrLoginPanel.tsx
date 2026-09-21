@@ -63,10 +63,10 @@ function StudentQrLoginPanel() {
           aria-hidden="true"
         />
         <div className="text-center">
-          <p className="text-xs font-black text-[#232852] sm:text-lg">
+          <p className="text-sm font-black text-[#232852] sm:text-xl">
             Masuk dengan QR Siswa
           </p>
-          <p className="mt-0.5 text-[10px] font-semibold leading-3.5 text-[#232852]/60 sm:mt-1 sm:text-sm sm:leading-5">
+          <p className="mt-0.5 text-sm font-semibold leading-3.5 text-[#232852]/60 sm:mt-1 sm:text-base sm:leading-5">
             Arahkan kamera ke QR yang diberikan sekolah.
           </p>
         </div>
@@ -78,7 +78,7 @@ function StudentQrLoginPanel() {
             setShowScanner(true);
           }}
           disabled={loading}
-          className="group mt-2.5 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border-b-4 border-[#232852] bg-[#3A72E3] px-2.5 py-2.5 text-[11px] font-black text-white shadow-[0_8px_0_rgba(35,40,82,0.12)] transition duration-200 hover:scale-[1.02] hover:bg-[#3269D4] active:translate-y-1 active:border-b-0 active:shadow-none disabled:cursor-not-allowed disabled:opacity-60 sm:mt-4 sm:min-h-16 sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3.5 sm:text-base"
+          className="group mt-2.5 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border-b-4 border-[#232852] bg-[#3A72E3] px-2.5 py-2.5 text-sm font-black text-white shadow-[0_8px_0_rgba(35,40,82,0.12)] transition duration-200 hover:scale-[1.02] hover:bg-[#3269D4] active:translate-y-1 active:border-b-0 active:shadow-none disabled:cursor-not-allowed disabled:opacity-60 sm:mt-4 sm:min-h-16 sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3.5 sm:text-lg"
         >
           <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EEB541] text-[#232852] shadow-inner sm:h-10 sm:w-10">
             <HiOutlineQrCode
@@ -95,7 +95,7 @@ function StudentQrLoginPanel() {
       </div>
 
       {user && code === 200 && accessToken && (
-        <p className="mt-2.5 text-center text-[10px] font-semibold text-[#232852]/50 sm:mt-4 sm:text-xs">
+        <p className="mt-2.5 text-center text-sm font-semibold text-[#232852]/50 sm:mt-4 sm:text-sm">
           Berhasil masuk, mengalihkan ke dashboard...
         </p>
       )}

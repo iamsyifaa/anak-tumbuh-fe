@@ -10,7 +10,7 @@ export type HabitId =
 export interface StudentSummary {
   id: string;
   name: string;
-  nissn: string;
+  nisn: string;
   className: string;
   schoolName: string;
   avatarUrl: string;
@@ -61,6 +61,11 @@ export interface HabitFormResponse {
   fields: HabitFormField[];
   locked: boolean;
   submittedValue?: Record<string, string>;
+  // Konten HTML panduan pengisian dari wali kelas (backend field:
+  // `panduan_teks`, diisi via Rich Text Editor di dashboard wali kelas).
+  // Dirender pakai dangerouslySetInnerHTML — begitu backend siap, tinggal
+  // dipetakan dari response asli, tidak perlu hardcode per habit lagi.
+  guideHtml?: string;
 }
 
 export interface SubmitHabitRequest {

@@ -10,9 +10,11 @@ const mockUsers: Record<string, AuthApiResponse["data"]> = {
 export const loginWithPasswordApi = async (formData: FormData): Promise<AuthApiResponse> => {
   if (envConfig.useMockApi) {
     const username = String(formData.get("username") ?? "").trim().toLowerCase();
-    const password = String(formData.get("password") ?? "");
+    // Backend: field ini isinya NISN siswa, bukan password bebas. Nilai
+    // dummy "demo123" dipertahankan sementara sampai endpoint asli siap.
+    const nisn = String(formData.get("nisn") ?? "");
     const user = Object.values(mockUsers).find((item) => item.username === username);
-    if (!user || password !== "demo123") return { code: 401, status: "error", message: "Username atau password demo salah. Gunakan password demo123.", data: {} as AuthApiResponse["data"], access_token: "" };
+    if (!user || nisn !== "demo123") return { code: 401, status: "error", message: "Username atau NISN demo salah. Gunakan NISN demo123.", data: {} as AuthApiResponse["data"], access_token: "" };
     return { code: 200, status: "success", message: "Login berhasil.", data: user, access_token: `mock-access-${user.id}` };
   }
 

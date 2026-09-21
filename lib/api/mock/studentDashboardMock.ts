@@ -1,3 +1,4 @@
+import { HABIT_GUIDE_HTML } from "./habitGuideMock";
 import {
   HabitFormResponse,
   HabitId,
@@ -15,7 +16,7 @@ import { formatIndonesianDate, getLocalDateKey } from "@/lib/utils/date";
 const student = {
   id: "student-001",
   name: "Syifa",
-  nissn: "0987654321",
+  nisn: "0987654321",
   className: "B1",
   schoolName: "TK Baiturrahman 3",
   avatarUrl: "/assets/student/girl-avatar.png",
@@ -258,10 +259,10 @@ const fieldsByHabit: Record<HabitId, HabitFormResponse["fields"]> = {
         "Kegiatan bermasyarakat yang kamu lakukan (isi lebih dari satu jika perlu)",
       kind: "choice",
       options: [
-        "Membantu keluarga atau lingkungan",
-        "Bermain dan bekerja sama dengan teman",
-        "Mengikuti kegiatan bersama",
-        "Belum melakukan kegiatan",
+        "Membereskan tempat tidur dan kebersihan rumah",
+        "Membantu pekerjaan orang tua",
+        "Bermain bersama teman sebaya",
+        "Kurang bermasyarakat",
       ],
     },
     {
@@ -287,10 +288,10 @@ const fieldsByHabit: Record<HabitId, HabitFormResponse["fields"]> = {
       helper: "Waktu tidur siswa.",
       kind: "choice",
       options: [
-        "Sebelum jam 08.00",
-        "Jam 08.00–09.00",
-        "Jam 07.00–10.00",
-        "Di atas jam 10.00",
+        "Sebelum jam 20.00",
+        "Jam 20.00–21.00",
+        "Jam 21.00–22.00",
+        "Di atas jam 22.00",
       ],
     },
     {
@@ -370,7 +371,7 @@ const recapItems = [
     category: "Baik hati & Kemandirian",
     dateKey: "2026-08-26",
     dateLabel: "26 Agustus 2026",
-    choice: "Merapikan tempat tidur",
+    choice: "Membereskan tempat tidur dan kebersihan rumah",
     initiative: "sadar sendiri",
     note: "melipat selimut rapi",
     pointsAwarded: 20,
@@ -409,7 +410,7 @@ const recapItems = [
     category: "Kedisiplinan Waktu",
     dateKey: "2026-08-30",
     dateLabel: "30 Agustus 2026",
-    choice: "Sebelum jam 08.00",
+    choice: "Sebelum jam 20.00",
     initiative: "disuruh",
     note: "tidur lebih awal",
     pointsAwarded: 15,
@@ -422,7 +423,7 @@ const recapItems = [
     category: "Sosial",
     dateKey: "2026-08-30",
     dateLabel: "30 Agustus 2026",
-    choice: "Mengikuti kegiatan bersama",
+    choice: "Bermain bersama teman sebaya",
     initiative: "sadar sendiri",
     note: "gotong royong",
     pointsAwarded: 20,
@@ -622,6 +623,7 @@ export const mockStudentDashboardApi: StudentDashboardApi = {
       fields: fieldsByHabit[habitId],
       locked: submissions.has(habitId),
       submittedValue: submissions.get(habitId),
+      guideHtml: HABIT_GUIDE_HTML[habitId],
     };
   },
 

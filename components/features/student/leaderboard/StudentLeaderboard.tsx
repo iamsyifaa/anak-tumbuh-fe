@@ -46,13 +46,13 @@ function StudentLeaderboardContent() {
 
   if (loading && !data)
     return (
-      <div className="grid min-h-[60vh] place-items-center text-sm font-bold text-slate-500">
+      <div className="grid min-h-[60vh] place-items-center text-base font-bold text-slate-500">
         Memuat papan juara...
       </div>
     );
   if (error && !data)
     return (
-      <div className="rounded-2xl bg-white p-6 text-sm font-bold text-red-600">
+      <div className="rounded-2xl bg-white p-6 text-base font-bold text-red-600">
         {error}
       </div>
     );
@@ -61,13 +61,13 @@ function StudentLeaderboardContent() {
   return (
     <div className="space-y-4">
       <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#3474EC] to-[#1854C9] p-4 text-white shadow-[0_12px_30px_rgba(31,90,210,0.2)] sm:p-6">
-        <p className="text-[9px] font-black uppercase tracking-[0.12em] text-[#BBD1FF]">
+        <p className="text-sm font-black uppercase tracking-[0.12em] text-[#BBD1FF]">
           Papan Peringkat
         </p>
-        <h2 className="mt-1 text-lg font-black sm:text-2xl">
+        <h2 className="mt-1 text-xl font-black sm:text-3xl">
           Rangkings Siswa Berprestasi
         </h2>
-        <p className="text-[9px] text-white/65 sm:text-xs">
+        <p className="text-sm text-white/65 sm:text-sm">
           Peringkat dihitung berdasarkan akumulasi Poin mingguan.
         </p>
 
@@ -75,14 +75,14 @@ function StudentLeaderboardContent() {
           <button
             type="button"
             onClick={() => changeScope("class")}
-            className={`rounded-full px-3 py-1 text-[9px] font-black ${scope === "class" ? "bg-white text-[#2F6FED]" : "bg-white/20 text-white"}`}
+            className={`rounded-full px-3 py-1 text-sm font-black ${scope === "class" ? "bg-white text-[#2F6FED]" : "bg-white/20 text-white"}`}
           >
             Kelas V-B
           </button>
           <button
             type="button"
             onClick={() => changeScope("grade")}
-            className={`rounded-full px-3 py-1 text-[9px] font-black ${scope === "grade" ? "bg-white text-[#2F6FED]" : "bg-white/20 text-white"}`}
+            className={`rounded-full px-3 py-1 text-sm font-black ${scope === "grade" ? "bg-white text-[#2F6FED]" : "bg-white/20 text-white"}`}
           >
             Angkatan 2026
           </button>
@@ -102,7 +102,7 @@ function StudentLeaderboardContent() {
                   isSecond ? "sm:translate-y-2" : "",
                 ].join(" ")}
               >
-                <span className="absolute left-3 top-0 z-10 -translate-y-1/2 rounded-full border border-white bg-white px-2 py-0.5 text-[8px] font-black text-[#27356E] shadow-[0_5px_10px_rgba(39,53,110,0.12)]">
+                <span className="absolute left-3 top-0 z-10 -translate-y-1/2 rounded-full border border-white bg-white px-2 py-0.5 text-xs font-black text-[#27356E] shadow-[0_5px_10px_rgba(39,53,110,0.12)]">
                   {rankLabel(entry.rank)}
                 </span>
 
@@ -125,16 +125,16 @@ function StudentLeaderboardContent() {
                     />
                   </div>
 
-                  <p className="mt-2 text-[10px] font-black text-[#17204E]">
+                  <p className="mt-2 text-sm font-black text-[#17204E]">
                     {entry.name}
                   </p>
-                  <p className="mt-0.5 text-[8px] text-slate-400">
+                  <p className="mt-0.5 text-xs text-slate-400">
                     {entry.className}
                   </p>
 
-                  <div className="mt-3 grid grid-cols-2 items-center border-t border-slate-200 text-center text-[8px] font-black">
+                  <div className="mt-3 grid grid-cols-2 items-center border-t border-slate-200 text-center text-xs font-black">
                     <div className="px-1 py-1.5 text-[#3A65D8]">
-                      <span className="block uppercase tracking-[0.12em] text-[7px] text-slate-400">
+                      <span className="block uppercase tracking-[0.12em] text-xs text-slate-400">
                         Poin
                       </span>
                       <span className="mt-0.5 block">
@@ -142,7 +142,7 @@ function StudentLeaderboardContent() {
                       </span>
                     </div>
                     <div className="border-l border-slate-200 px-1 py-1.5 text-[#F59E0B]">
-                      <span className="block uppercase tracking-[0.12em] text-[7px] text-slate-400">
+                      <span className="block uppercase tracking-[0.12em] text-xs text-slate-400">
                         Level
                       </span>
                       <span className="mt-0.5 block">{entry.level}</span>
@@ -157,12 +157,12 @@ function StudentLeaderboardContent() {
 
       <section className="rounded-3xl border border-white bg-white p-4 shadow-[0_8px_30px_rgba(23,32,78,0.06)] sm:p-5">
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <h3 className="text-base font-black sm:text-lg">Leaderboard Kelas</h3>
+          <h3 className="text-lg font-black sm:text-xl">Leaderboard Kelas</h3>
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Cari nama siswa..."
-            className="w-full rounded-full border border-slate-200 px-3 py-2 text-[9px] outline-none sm:w-52"
+            className="w-full rounded-full border border-slate-200 px-3 py-2 text-sm outline-none sm:w-52"
           />
         </div>
         <div className="space-y-2">
@@ -171,7 +171,7 @@ function StudentLeaderboardContent() {
               key={entry.studentId}
               className="flex items-center gap-3 rounded-xl border border-slate-100 px-3 py-2.5"
             >
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-[#EEF2FF] text-[9px] font-black text-[#5668B7]">
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-[#EEF2FF] text-sm font-black text-[#5668B7]">
                 {entry.rank}
               </span>
               <Image
@@ -182,22 +182,22 @@ function StudentLeaderboardContent() {
                 className="h-8 w-8 rounded-full object-cover"
               />
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[10px] font-black">{entry.name}</p>
-                <p className="text-[8px] text-slate-400">{entry.className}</p>
+                <p className="truncate text-sm font-black">{entry.name}</p>
+                <p className="text-xs text-slate-400">{entry.className}</p>
               </div>
               <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1 text-[9px] font-black text-[#2F6FED]">
+                <span className="flex items-center gap-1 text-sm font-black text-[#2F6FED]">
                   <HiCircleStack className="h-3 w-3" />
                   {entry.points.toLocaleString("id-ID")}
                 </span>
-                <span className="flex items-center gap-1 text-[9px] font-black text-amber-500">
+                <span className="flex items-center gap-1 text-sm font-black text-amber-500">
                   <HiStar className="h-3 w-3" /> {entry.level}
                 </span>
               </div>
             </div>
           ))}
           {rest.length === 0 && (
-            <p className="py-6 text-center text-xs font-semibold text-slate-400">
+            <p className="py-6 text-center text-sm font-semibold text-slate-400">
               Siswa tidak ditemukan.
             </p>
           )}

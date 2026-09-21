@@ -11,6 +11,7 @@ import InfoNotice from "@/components/ui/feedback/InfoNotice";
 import OptionButton from "@/components/ui/form/OptionButton";
 import PrimaryButton from "@/components/ui/Button/PrimaryButton";
 import SuccessModal from "@/components/ui/Modal/SuccessModal";
+import HabitGuideButton from "./HabitGuideButton";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchStudentDashboard } from "@/redux/features/student/home/homeSlice";
 import {
@@ -65,18 +66,18 @@ function StudentHabitFormPage({ habitId }: Props) {
       <div className="mx-auto w-full max-w-[620px]">
         <Link
           href="/dashboard/student"
-          className="inline-flex items-center gap-1.5 text-[10px] font-bold text-slate-500 hover:text-[#2F6FED]"
+          className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-[#2F6FED]"
         >
           <HiArrowLeft className="h-3.5 w-3.5" /> Kembali ke Laporan Harian
         </Link>
 
         {loading && (
-          <div className="grid min-h-[60vh] place-items-center text-sm font-bold text-slate-500">
+          <div className="grid min-h-[60vh] place-items-center text-base font-bold text-slate-500">
             Memuat form...
           </div>
         )}
         {error && !data && (
-          <div className="mt-5 rounded-2xl bg-white p-6 text-sm font-bold text-red-600">
+          <div className="mt-5 rounded-2xl bg-white p-6 text-base font-bold text-red-600">
             {error}
           </div>
         )}
@@ -94,12 +95,16 @@ function StudentHabitFormPage({ habitId }: Props) {
                   priority
                 />
               </div>
-              <h1 className="text-xl font-black sm:text-2xl">
+              <h1 className="text-2xl font-black sm:text-3xl">
                 {data.habit.title}
               </h1>
-              <p className="mx-auto mt-1 max-w-md text-[10px] leading-4 text-slate-500 sm:text-xs">
+              <p className="mx-auto mt-1 max-w-md text-sm leading-4 text-slate-500 sm:text-sm">
                 {data.habit.description}
               </p>
+              <HabitGuideButton
+                habitTitle={data.habit.title}
+                guideHtml={data.guideHtml}
+              />
             </div>
 
             <div className="mt-4">
@@ -114,14 +119,14 @@ function StudentHabitFormPage({ habitId }: Props) {
               {data.fields.map((field) => (
                 <div key={field.id}>
                   <div className="mb-2">
-                    <p className="text-[10px] font-black text-[#17204E] sm:text-xs">
+                    <p className="text-sm font-black text-[#17204E] sm:text-sm">
                       {field.label}{" "}
                       {!field.optional && (
                         <span className="text-red-500">*</span>
                       )}
                     </p>
                     {field.helper && (
-                      <p className="mt-0.5 text-[9px] text-slate-400">
+                      <p className="mt-0.5 text-sm text-slate-400">
                         {field.helper}
                       </p>
                     )}
@@ -134,11 +139,21 @@ function StudentHabitFormPage({ habitId }: Props) {
                           .split(", ")
                           .filter(Boolean);
                         const selected = selectedOptions.includes(option);
-                        const nextValue = selected
-                          ? selectedOptions
-                              .filter((value) => value !== option)
-                              .join(", ")
-                          : [...selectedOptions, option].join(", ");
+                        // Requirement doc bagian 4.5: opsi terakhir Bermasyarakat
+                        // ("Kurang bermasyarakat") berdiri sendiri — begitu
+                        // dipilih, opsi lain ikut kehapus, dan sebaliknya.
+                        const exclusiveOption = field.options?.[field.options.length - 1];
+                        const isExclusiveOption = option === exclusiveOption && isMultiSelect;
+                        const nextValue = (() => {
+                          if (!isMultiSelect) return option;
+                          if (isExclusiveOption) return selected ? "" : option;
+                          const withoutExclusive = selectedOptions.filter(
+                            (value) => value !== exclusiveOption,
+                          );
+                          return selected
+                            ? withoutExclusive.filter((value) => value !== option).join(", ")
+                            : [...withoutExclusive, option].join(", ");
+                        })();
 
                         return (
                           <OptionButton
@@ -153,7 +168,7 @@ function StudentHabitFormPage({ habitId }: Props) {
                               dispatch(
                                 setHabitValue({
                                   fieldId: field.id,
-                                  value: isMultiSelect ? nextValue : option,
+                                  value: nextValue,
                                 }),
                               )
                             }
@@ -179,9 +194,9 @@ function StudentHabitFormPage({ habitId }: Props) {
                         placeholder={field.helper}
                         disabled={data.locked}
                         rows={5}
-                        className="w-full rounded-xl border border-slate-200 px-3 py-3 text-[10px] outline-none ring-[#2F6FED]/20 placeholder:text-slate-300 focus:border-[#8EACF2] focus:ring-2 sm:text-xs"
+                        className="w-full rounded-xl border border-slate-200 px-3 py-3 text-sm outline-none ring-[#2F6FED]/20 placeholder:text-slate-300 focus:border-[#8EACF2] focus:ring-2 sm:text-sm"
                       />
-                      <p className="mt-1 text-right text-[8px] text-slate-400">
+                      <p className="mt-1 text-right text-xs text-slate-400">
                         {(values[field.id] ?? "").length}/
                         {field.maxLength ?? 1000}
                       </p>
@@ -192,7 +207,7 @@ function StudentHabitFormPage({ habitId }: Props) {
             </div>
 
             {data.locked ? (
-              <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-emerald-50 px-3 py-3 text-xs font-black text-emerald-700">
+              <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-emerald-50 px-3 py-3 text-sm font-black text-emerald-700">
                 <HiOutlineLockClosed className="h-4 w-4" /> Kebiasaan ini sudah
                 tercatat dan dikunci.
               </div>

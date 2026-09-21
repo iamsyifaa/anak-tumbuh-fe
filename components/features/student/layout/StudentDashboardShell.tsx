@@ -47,14 +47,14 @@ export default function StudentDashboardShell({
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[228px] flex-col bg-[#182047] px-4 py-6 text-white lg:flex">
         <Link
           href="/dashboard/student"
-          className="mb-8 px-3 text-lg font-black tracking-tight"
+          className="mb-8 px-3 text-xl font-black tracking-tight"
         >
           anak
           <span className="text-[#2F6FED]">tumbuh</span>
           <span className="text-[#F5BE3B]">.id</span>
         </Link>
 
-        <p className="px-3 text-[9px] font-bold uppercase tracking-[0.14em] text-white/45">
+        <p className="px-3 text-sm font-bold uppercase tracking-[0.14em] text-white/45">
           Menu Utama
         </p>
 
@@ -67,7 +67,7 @@ export default function StudentDashboardShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition ${
+                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold transition ${
                   active
                     ? "bg-[#2F6FED] text-white shadow-sm"
                     : "text-white/70 hover:bg-white/10 hover:text-white"
@@ -82,10 +82,10 @@ export default function StudentDashboardShell({
 
         <div className="mt-auto">
           <div className="rounded-2xl bg-[#27335E] px-3 py-3 text-center">
-            <p className="text-[10px] font-black">
+            <p className="text-sm font-black">
               Anak Hebat, Indonesia Kuat!
             </p>
-            <p className="mt-1 text-[8px] leading-3.5 text-white/65">
+            <p className="mt-1 text-xs leading-3.5 text-white/65">
               Jadilah versi terbaik dirimu setiap hari.
             </p>
 
@@ -99,7 +99,7 @@ export default function StudentDashboardShell({
             />
           </div>
 
-          <p className="mt-2 text-center text-[7px] text-white/25">
+          <p className="mt-2 text-center text-xs text-white/25">
             © 2026 anaktumbuh.id — Semua hak dilindungi
           </p>
         </div>
@@ -117,10 +117,10 @@ export default function StudentDashboardShell({
             >
               {headerMode === "greeting" && (
                 <div>
-                  <h1 className="text-lg font-black sm:text-2xl">
+                  <h1 className="text-xl font-black sm:text-3xl">
                     Halo, {displayName}!
                   </h1>
-                  <p className="mt-0.5 hidden text-xs font-medium text-slate-500 sm:block">
+                  <p className="mt-0.5 hidden text-sm font-medium text-slate-500 sm:block">
                     Silahkan isi 7 Kebiasaan Anak Indonesia Hebat hari ini.
                   </p>
                 </div>
@@ -139,8 +139,8 @@ export default function StudentDashboardShell({
                 />
 
                 <div className="hidden text-right sm:block">
-                  <p className="text-[11px] font-black">{displayName}</p>
-                  <p className="text-[9px] font-medium text-slate-400">
+                  <p className="text-sm font-black">{displayName}</p>
+                  <p className="text-sm font-medium text-slate-400">
                     Siswa Kelas B1
                   </p>
                 </div>
@@ -163,11 +163,11 @@ export default function StudentDashboardShell({
             <Link
               key={item.href}
               href={item.href}
-              className={`flex min-w-[64px] flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[9px] font-bold ${
+              className={`flex min-w-[68px] flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-center text-xs font-bold leading-tight ${
                 active ? "bg-[#EAF1FF] text-[#2F6FED]" : "text-slate-400"
               }`}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-5 w-5" />
               <span>{item.label}</span>
             </Link>
           );
