@@ -130,6 +130,13 @@ export default function StudentDashboardShell({
                 href="/dashboard/student/profile"
                 className="flex items-center gap-2"
               >
+                <div className="hidden text-right sm:block">
+                  <p className="text-sm font-black">{displayName}</p>
+                  <p className="text-sm font-medium text-slate-400">
+                    Siswa Kelas B1
+                  </p>
+                </div>
+
                 <Image
                   src={avatar}
                   alt={displayName}
@@ -137,13 +144,6 @@ export default function StudentDashboardShell({
                   height={36}
                   className="h-9 w-9 rounded-full object-cover ring-2 ring-white"
                 />
-
-                <div className="hidden text-right sm:block">
-                  <p className="text-sm font-black">{displayName}</p>
-                  <p className="text-sm font-medium text-slate-400">
-                    Siswa Kelas B1
-                  </p>
-                </div>
               </Link>
             </div>
           </header>

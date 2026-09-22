@@ -13,13 +13,12 @@ import ErrorAlert from "@/components/ui/Alert/ErrorAlert";
 // One of the 2 student login methods (see StudentLoginTabs). Content-only —
 // the shared card, header, and tab switcher live in StudentLoginTabs.
 //
-// Backend note: the credential here is the student's NISN, not a freeform
-// password — login field is named "nisn" to match. Dummy/mock login still
-// checks against the fixed demo value "demo123" until the real endpoint
-// is wired up.
+// Backend note: both fields are labeled "Username" / "Password" on screen
+// (kept generic on purpose), but the values a student actually enters are
+// their NISN in both — so username === password === student's NISN.
 function StudentPasswordLoginForm() {
   const [username, setUsername] = useState("");
-  const [nisn, setNisn] = useState("");
+  const [password, setPassword] = useState("");
   const redirectAfterLogin = useRedirectAfterLogin();
   const dispatch = useDispatch<AppDispatch>();
   const { loading, error } = useSelector((state: RootState) => state.auth);
@@ -30,7 +29,7 @@ function StudentPasswordLoginForm() {
 
     const formData = new FormData();
     formData.append("username", username.trim());
-    formData.append("nisn", nisn);
+    formData.append("password", password);
 
     const result = await dispatch(loginWithPassword({ formData }));
 
@@ -48,7 +47,7 @@ function StudentPasswordLoginForm() {
           id="student-username"
           name="username"
           label="Username"
-          placeholder="Masukkan username"
+          placeholder="Masukkan username (NISN)"
           autoComplete="username"
           value={username}
           onChange={(event) => {
@@ -58,21 +57,21 @@ function StudentPasswordLoginForm() {
         />
 
         <PasswordField
-          id="student-nisn"
-          name="nisn"
-          label="NISN"
-          placeholder="Masukkan NISN"
-          autoComplete="off"
-          value={nisn}
+          id="student-password"
+          name="password"
+          label="Password"
+          placeholder="Masukkan password (NISN)"
+          autoComplete="current-password"
+          value={password}
           onChange={(event) => {
-            setNisn(event.target.value);
+            setPassword(event.target.value);
             if (error) dispatch(clearAuthMessage());
           }}
         />
 
         <button
           type="submit"
-          disabled={loading || !username.trim() || !nisn}
+          disabled={loading || !username.trim() || !password}
           className="group w-full rounded-xl border-b-4 border-[#232852] bg-[#3A72E3] py-2.5 text-sm font-black text-white shadow-lg shadow-[#3A72E3]/40 transition-all hover:scale-[1.02] hover:bg-[#3268D5] active:scale-95 active:translate-y-1 active:border-b-0 active:shadow-md disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 sm:rounded-2xl sm:py-4 sm:text-lg"
         >
           <span className="inline-flex items-center justify-center gap-2">

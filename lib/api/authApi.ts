@@ -3,18 +3,18 @@ import { AuthApiResponse } from "@/lib/types/authType";
 
 const mockUsers: Record<string, AuthApiResponse["data"]> = {
   "student-qr-jaehyun": { id: "student-001", name: "Jaehyun", username: "jaehyun", role: "student", classGroupId: "B1", schoolId: "school-001", avatarUrl: "/assets/student/boy-avatar.png" },
-  "student-qr-syifa": { id: "student-002", name: "Syifa", username: "syifa", role: "student", classGroupId: "V-B", schoolId: "school-001", avatarUrl: "/assets/student/girl-avatar.png" },
+  "student-qr-syifa": { id: "student-002", name: "Syifa", username: "0095647260", role: "student", classGroupId: "V-B", schoolId: "school-001", avatarUrl: "/assets/student/girl-avatar.png" },
   "student-qr-ahmad": { id: "student-003", name: "Ahmad R.", username: "ahmad", role: "student", classGroupId: "V-B", schoolId: "school-001", avatarUrl: "/assets/student/boy-avatar.png" },
 };
 
 export const loginWithPasswordApi = async (formData: FormData): Promise<AuthApiResponse> => {
   if (envConfig.useMockApi) {
     const username = String(formData.get("username") ?? "").trim().toLowerCase();
-    // Backend: field ini isinya NISN siswa, bukan password bebas. Nilai
-    // dummy "demo123" dipertahankan sementara sampai endpoint asli siap.
-    const nisn = String(formData.get("nisn") ?? "");
+    // Field & label tetap "Username"/"Password" di tampilan, tapi nilai
+    // yang siswa masukkan di keduanya sama-sama NISN mereka.
+    const password = String(formData.get("password") ?? "");
     const user = Object.values(mockUsers).find((item) => item.username === username);
-    if (!user || nisn !== "demo123") return { code: 401, status: "error", message: "Username atau NISN demo salah. Gunakan NISN demo123.", data: {} as AuthApiResponse["data"], access_token: "" };
+    if (!user || password !== "0095647260") return { code: 401, status: "error", message: "Username atau password demo salah. Gunakan NISN 0095647260 untuk keduanya.", data: {} as AuthApiResponse["data"], access_token: "" };
     return { code: 200, status: "success", message: "Login berhasil.", data: user, access_token: `mock-access-${user.id}` };
   }
 

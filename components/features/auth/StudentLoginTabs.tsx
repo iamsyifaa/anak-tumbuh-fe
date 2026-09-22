@@ -10,7 +10,7 @@ type LoginMethod = "qr" | "password";
 
 const TABS: { key: LoginMethod; label: string; icon: typeof HiOutlineQrCode }[] = [
   { key: "qr", label: "Scan QR", icon: HiOutlineQrCode },
-  { key: "password", label: "NISN", icon: HiOutlineKey },
+  { key: "password", label: "Password", icon: HiOutlineKey },
 ];
 
 // Requirement doc section 8 normally restricts students to QR-only login
@@ -25,7 +25,7 @@ function StudentLoginTabs() {
       <p className="mx-auto mt-1.5 max-w-[13rem] text-center text-sm font-semibold leading-4 text-[#232852]/55 sm:mt-2 sm:max-w-sm sm:text-base sm:leading-5">
         {method === "qr"
           ? "Scan QR siswa untuk masuk ke aplikasi kebiasaanmu."
-          : "Masuk dengan username dan NISN siswa kamu."}
+          : "Masuk dengan username dan password siswa kamu."}
       </p>
 
       <div className="mt-3 grid grid-cols-2 gap-1 rounded-xl bg-[#EEF5FF] p-1 sm:mt-7 sm:gap-2 sm:rounded-2xl sm:p-1.5">
