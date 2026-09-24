@@ -1,7 +1,6 @@
 import { HABIT_GUIDE_HTML } from "./habitGuideMock";
 import {
   HabitFormField,
-  HabitFormResponse,
   HabitId,
   LeaderboardResponse,
   LeaderboardScope,

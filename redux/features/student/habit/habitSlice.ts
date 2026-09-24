@@ -1,12 +1,86 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { studentDashboardApi } from "@/lib/api/studentDashboardApi";
+import { getLocalDateKey } from "@/lib/utils/date";
+import { getPendingHabitSubmission, savePendingHabitSubmission } from "@/lib/pwa/offlineDb";
 import { HabitFormResponse, HabitId, SubmitHabitResponse } from "@/lib/types/studentDashboard";
+import type { RootState } from "@/redux/store";
 
 interface State { data: HabitFormResponse | null; values: Record<string, string>; loading: boolean; submitting: boolean; error: string | null; submitResult: SubmitHabitResponse | null; }
 const initialState: State = { data: null, values: {}, loading: false, submitting: false, error: null, submitResult: null };
 
-export const fetchHabitForm = createAsyncThunk("studentHabit/fetchForm", (habitId: HabitId) => studentDashboardApi.getHabitForm(habitId));
-export const submitHabit = createAsyncThunk("studentHabit/submit", ({ habitId, values }: { habitId: HabitId; values: Record<string, string> }) => studentDashboardApi.submitHabit({ habitId, values }));
+export const fetchHabitForm = createAsyncThunk(
+  "studentHabit/fetchForm",
+  async (habitId: HabitId) => {
+    const response = await studentDashboardApi.getHabitForm(habitId);
+    try {
+      const pending = await getPendingHabitSubmission(habitId, getLocalDateKey());
+      if (pending) {
+        return {
+          ...response,
+          locked: true,
+          submittedValue: pending.nilai,
+        };
+      }
+    } catch {
+      // IndexedDB is an enhancement for the offline path.
+    }
+    return response;
+  },
+);
+
+export const submitHabit = createAsyncThunk<
+  SubmitHabitResponse,
+  { habitId: HabitId; values: Record<string, string> },
+  { state: RootState }
+>(
+  "studentHabit/submit",
+  async ({ habitId, values }, thunkApi) => {
+    const isOffline = typeof navigator !== "undefined" && !navigator.onLine;
+
+    if (isOffline) {
+      const studentId = thunkApi.getState().auth.user?.id ?? "student-unknown";
+      const pending = await savePendingHabitSubmission({
+        siswaId: studentId,
+        habitId,
+        values,
+        dateKey: getLocalDateKey(),
+      });
+
+      return {
+        success: true,
+        message: "Data tersimpan di perangkat. Sinkronisasi menunggu API Backend.",
+        completedAt: pending.created_at,
+        pointsAwarded: 0,
+        expAwarded: 0,
+        locked: true,
+      };
+    }
+
+    try {
+      return await studentDashboardApi.submitHabit({ habitId, values });
+    } catch (error) {
+      const networkFailure = error instanceof TypeError || (typeof navigator !== "undefined" && !navigator.onLine);
+      if (!networkFailure) throw error;
+
+      const studentId = thunkApi.getState().auth.user?.id ?? "student-unknown";
+      const pending = await savePendingHabitSubmission({
+        siswaId: studentId,
+        habitId,
+        values,
+        dateKey: getLocalDateKey(),
+      });
+
+      return {
+        success: true,
+        message: "Koneksi terputus. Data tersimpan di perangkat dan berstatus pending.",
+        completedAt: pending.created_at,
+        pointsAwarded: 0,
+        expAwarded: 0,
+        locked: true,
+      };
+    }
+  },
+);
 
 const habitSlice = createSlice({
   name: "studentHabit",
