@@ -1,5 +1,6 @@
 import { HABIT_GUIDE_HTML } from "./habitGuideMock";
 import {
+  HabitFormField,
   HabitFormResponse,
   HabitId,
   LeaderboardResponse,
@@ -35,7 +36,7 @@ const habits: StudentDashboardResponse["habits"] = [
     order: 1,
     title: "Bangun Pagi",
     shortTitle: "Bangun Pagi",
-    description: "Kebiasaan bangun sesuai waktu yang ditetapkan.",
+    description: "Kebiasaan bangun pagi, dihitung dari waktu adzan subuh.",
     imageUrl: "/assets/student/wake-up.png",
     completed: false,
     pointsAwarded: 15,
@@ -46,7 +47,7 @@ const habits: StudentDashboardResponse["habits"] = [
     order: 2,
     title: "Beribadah",
     shortTitle: "Beribadah",
-    description: "Kebiasaan menjalankan ibadah sesuai konteks sekolah/siswa.",
+    description: "Kebiasaan menjalankan ibadah sesuai target.",
     imageUrl: "/assets/student/prayer.png",
     completed: false,
     pointsAwarded: 20,
@@ -68,7 +69,7 @@ const habits: StudentDashboardResponse["habits"] = [
     order: 4,
     title: "Makan Sehat dan Bergizi",
     shortTitle: "Makan Sehat & Bergizi",
-    description: "Kebiasaan menjaga pola makan.",
+    description: "Kebiasaan menjaga makan sehat dan bergizi.",
     imageUrl: "/assets/student/healthy-food.png",
     completed: false,
     pointsAwarded: 20,
@@ -110,206 +111,130 @@ const habits: StudentDashboardResponse["habits"] = [
   },
 ];
 
-const fieldsByHabit: Record<HabitId, HabitFormResponse["fields"]> = {
-  "wake-up": [
-    {
-      id: "wake_time",
-      label: "1. JAM BANGUN",
-      helper: "Pilih jam bangun yang paling sesuai",
-      kind: "choice",
-      options: ["Sebelum 04.00", "04.00–05.00", "05.00–06.00", "Di atas 06.00"],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri", "Disuruh"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
-  prayer: [
-    {
-      id: "completion",
-      label: "1. PILIHAN",
-      helper: "Seberapa rutin kamu beribadah hari ini?",
-      kind: "choice",
-      options: [
-        "100 Persen Dilaksanakan",
-        "75–100 Persen",
-        "50–75 Persen",
-        "Di bawah 50 Persen",
-      ],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri", "Disuruh"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
-  sports: [
-    {
-      id: "duration",
-      label: "1. APAKAH OLAHRAGA?",
-      helper: "Waktu olahraga siswa.",
-      kind: "choice",
-      options: [
-        "Di atas 1 jam",
-        "45 menit sampai 1 jam",
-        "15 menit sampai 45 menit",
-        "Di bawah 15 menit",
-      ],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri", "Disuruh"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
-  "healthy-food": [
-    {
-      id: "meal_quality",
-      label: "1. PILIHAN",
-      helper: "Sangat beragam makanan sehat dan bergizi",
-      kind: "choice",
-      options: [
-        "Sangat beragam makanan sehat dan bergizi",
-        "Beragam makanan sehat",
-        "Kurang beragam makanan sehat",
-        "Tidak beragam makanan sehat",
-      ],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri (mudah makan)", "Disuruh (susah makan)"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
-  reading: [
-    {
-      id: "duration",
-      label: "1. DURASI",
-      helper: "Durasi belajar.",
-      kind: "choice",
-      options: [
-        "Di atas 1 jam",
-        "45 menit sampai 1 jam",
-        "15 menit sampai 45 menit",
-        "Di bawah 15 menit",
-      ],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri", "Disuruh"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
-  community: [
-    {
-      id: "activity",
-      label: "1. PILIHAN",
-      helper:
-        "Kegiatan bermasyarakat yang kamu lakukan (isi lebih dari satu jika perlu)",
-      kind: "choice",
-      options: [
-        "Membereskan tempat tidur dan kebersihan rumah",
-        "Membantu pekerjaan orang tua",
-        "Bermain bersama teman sebaya",
-        "Kurang bermasyarakat",
-      ],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri", "Disuruh"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
-  "early-sleep": [
-    {
-      id: "sleep_time",
-      label: "1. PILIHAN",
-      helper: "Waktu tidur siswa.",
-      kind: "choice",
-      options: [
-        "Sebelum jam 20.00",
-        "Jam 20.00–21.00",
-        "Jam 21.00–22.00",
-        "Di atas jam 22.00",
-      ],
-    },
-    {
-      id: "initiative",
-      label: "2. INISIATIF",
-      helper: "Siapa yang mengingatkan kegiatan tersebut?",
-      kind: "choice",
-      options: ["Sadar sendiri", "Disuruh"],
-    },
-    {
-      id: "note",
-      label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
-      helper: "Ceritakan pengalamanmu hari ini...",
-      kind: "textarea",
-      optional: true,
-      maxLength: 1000,
-    },
-  ],
+// Indikator kebiasaan mengikuti dokumen menu Guru Wali Kelas (versi terbaru):
+// setiap kebiasaan punya 4 tingkat indikator + 1 pilihan inisiatif.
+// Untuk Berolahraga & Bermasyarakat, inisiatif bersifat opsional karena
+// tidak perlu diisi jika siswa tidak melakukan kegiatan sama sekali.
+const noteField: HabitFormField = {
+  id: "note",
+  label: "CATATAN PENGALAMAN & CERITA (OPSIONAL)",
+  helper: "Ceritakan pengalamanmu hari ini...",
+  kind: "textarea",
+  optional: true,
+  maxLength: 1000,
+};
+
+const buildFields = ({
+  indicatorId,
+  indicatorLabel,
+  indicatorHelper,
+  options,
+  initiativeHelper,
+  initiativeOptions,
+  initiativeOptional = false,
+}: {
+  indicatorId: string;
+  indicatorLabel: string;
+  indicatorHelper: string;
+  options: string[];
+  initiativeHelper: string;
+  initiativeOptions: [string, string];
+  initiativeOptional?: boolean;
+}): HabitFormField[] => [
+  {
+    id: indicatorId,
+    label: indicatorLabel,
+    helper: indicatorHelper,
+    kind: "choice",
+    options,
+  },
+  {
+    id: "initiative",
+    label: "2. INISIATIF",
+    helper: initiativeHelper,
+    kind: "choice",
+    options: initiativeOptions,
+    optional: initiativeOptional,
+  },
+  noteField,
+];
+
+const fieldsByHabit: Record<HabitId, HabitFormField[]> = {
+  "wake-up": buildFields({
+    indicatorId: "wake_time",
+    indicatorLabel: "1. WAKTU BANGUN",
+    indicatorHelper:
+      "Dihitung dari waktu adzan subuh di kotamu hari ini (bukan dari jam yang sama untuk semua kota).",
+    options: [
+      "Sebelum adzan subuh",
+      "0–30 menit setelah adzan",
+      "31–60 menit setelah adzan",
+      "Di atas 60 menit setelah adzan",
+    ],
+    initiativeHelper: "Kamu bangun sendiri atau dibangunkan?",
+    initiativeOptions: ["Bangun sendiri", "Dibangunkan"],
+  }),
+  prayer: buildFields({
+    indicatorId: "completion",
+    indicatorLabel: "1. PELAKSANAAN IBADAH",
+    indicatorHelper: "Seberapa banyak ibadah yang kamu laksanakan dibanding target?",
+    options: ["Di atas target", "Sesuai target", "Sebagian besar", "Sebagian kecil"],
+    initiativeHelper:
+      "Jika sebagian besar ibadahmu tidak perlu disuruh, pilih Sadar sendiri.",
+    initiativeOptions: ["Sadar sendiri", "Disuruh"],
+  }),
+  reading: buildFields({
+    indicatorId: "completion",
+    indicatorLabel: "1. PELAKSANAAN BELAJAR",
+    indicatorHelper: "Seberapa banyak kegiatan belajarmu dibanding target?",
+    options: ["Di atas target", "Sesuai target", "Sebagian besar", "Sebagian kecil"],
+    initiativeHelper:
+      "Jika sebagian besar kegiatan belajarmu tidak perlu disuruh, pilih Sadar sendiri.",
+    initiativeOptions: ["Sadar sendiri", "Disuruh"],
+  }),
+  "healthy-food": buildFields({
+    indicatorId: "meal_quality",
+    indicatorLabel: "1. MENJAGA MAKAN SEHAT BERGIZI",
+    indicatorHelper: "Seberapa kamu menjaga makanan sehat dan bergizi hari ini?",
+    options: ["Sangat dijaga", "Dijaga", "Kurang dijaga", "Tidak dijaga"],
+    initiativeHelper: "Kamu menjaga makanmu sendiri atau harus disuruh?",
+    initiativeOptions: ["Sadar sendiri", "Disuruh"],
+  }),
+  sports: buildFields({
+    indicatorId: "duration",
+    indicatorLabel: "1. WAKTU OLAHRAGA",
+    indicatorHelper: "Seberapa cukup waktu olahragamu hari ini?",
+    options: ["Waktu maksimal", "Waktu optimal", "Waktu cukup", "Waktu kurang"],
+    initiativeHelper:
+      "Kosongkan jika kamu tidak berolahraga sama sekali hari ini.",
+    initiativeOptions: ["Mandiri", "Disuruh"],
+    initiativeOptional: true,
+  }),
+  community: buildFields({
+    indicatorId: "activity",
+    indicatorLabel: "1. KEAKTIFAN BERMASYARAKAT",
+    indicatorHelper:
+      "Seberapa aktif kamu bermasyarakat (keluarga, teman, dan lingkungan)?",
+    options: ["Sangat aktif", "Aktif", "Cukup aktif", "Kurang aktif"],
+    initiativeHelper:
+      "Kosongkan jika kamu tidak bermasyarakat sama sekali hari ini.",
+    initiativeOptions: ["Mandiri", "Disuruh"],
+    initiativeOptional: true,
+  }),
+  "early-sleep": buildFields({
+    indicatorId: "sleep_time",
+    indicatorLabel: "1. WAKTU TIDUR",
+    indicatorHelper:
+      "Pilih sesuai waktu setempat di kotamu (WIB/WITA/WIT).",
+    options: [
+      "Di bawah pukul 20.00",
+      "Pukul 20.00–21.00",
+      "Pukul 21.00–22.00",
+      "Di atas pukul 22.00",
+    ],
+    initiativeHelper: "Kamu tidur sendiri atau harus disuruh?",
+    initiativeOptions: ["Tidur sendiri", "Disuruh"],
+  }),
 };
 
 const submissionsByDate = new Map<
@@ -332,7 +257,7 @@ const recapItems = [
     category: "Gizi & Pola Makan",
     dateKey: "2026-08-26",
     dateLabel: "26 Agustus 2026",
-    choice: "Beragam Makanan Sehat",
+    choice: "Dijaga",
     initiative: "sadar sendiri",
     note: "ayam goreng",
     pointsAwarded: 20,
@@ -345,8 +270,8 @@ const recapItems = [
     category: "Kedisiplinan Waktu",
     dateKey: "2026-08-26",
     dateLabel: "26 Agustus 2026",
-    choice: "sebelum pukul 4",
-    initiative: "disuruh",
+    choice: "Sebelum adzan subuh",
+    initiative: "dibangunkan",
     note: "Tidak ada",
     pointsAwarded: 15,
     completed: true,
@@ -358,7 +283,7 @@ const recapItems = [
     category: "Spiritual & Karakter",
     dateKey: "2026-08-26",
     dateLabel: "26 Agustus 2026",
-    choice: "Sholat Subuh di Masjid",
+    choice: "Sesuai target",
     initiative: "sadar sendiri",
     note: "berjamaah bersama ayah",
     pointsAwarded: 25,
@@ -371,8 +296,8 @@ const recapItems = [
     category: "Baik hati & Kemandirian",
     dateKey: "2026-08-26",
     dateLabel: "26 Agustus 2026",
-    choice: "Membereskan tempat tidur dan kebersihan rumah",
-    initiative: "sadar sendiri",
+    choice: "Aktif",
+    initiative: "mandiri",
     note: "melipat selimut rapi",
     pointsAwarded: 20,
     completed: true,
@@ -384,8 +309,8 @@ const recapItems = [
     category: "Kesehatan",
     dateKey: "2026-08-27",
     dateLabel: "27 Agustus 2026",
-    choice: "45 menit sampai 1 jam",
-    initiative: "sadar sendiri",
+    choice: "Waktu optimal",
+    initiative: "mandiri",
     note: "bersepeda sore",
     pointsAwarded: 20,
     completed: true,
@@ -397,7 +322,7 @@ const recapItems = [
     category: "Pendidikan",
     dateKey: "2026-08-27",
     dateLabel: "27 Agustus 2026",
-    choice: "Di atas 1 jam",
+    choice: "Di atas target",
     initiative: "sadar sendiri",
     note: "membaca buku cerita",
     pointsAwarded: 20,
@@ -410,7 +335,7 @@ const recapItems = [
     category: "Kedisiplinan Waktu",
     dateKey: "2026-08-30",
     dateLabel: "30 Agustus 2026",
-    choice: "Sebelum jam 20.00",
+    choice: "Di bawah pukul 20.00",
     initiative: "disuruh",
     note: "tidur lebih awal",
     pointsAwarded: 15,
@@ -423,8 +348,8 @@ const recapItems = [
     category: "Sosial",
     dateKey: "2026-08-30",
     dateLabel: "30 Agustus 2026",
-    choice: "Bermain bersama teman sebaya",
-    initiative: "sadar sendiri",
+    choice: "Cukup aktif",
+    initiative: "mandiri",
     note: "gotong royong",
     pointsAwarded: 20,
     completed: true,

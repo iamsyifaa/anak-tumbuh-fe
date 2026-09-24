@@ -30,7 +30,6 @@ function StudentHabitFormPage({ habitId }: Props) {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const typedHabitId = habitId as HabitId;
-  const isMultiSelect = typedHabitId === "community";
   const { data, values, loading, submitting, error, submitResult } =
     useSelector((state: RootState) => state.studentHabit);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -135,40 +134,21 @@ function StudentHabitFormPage({ habitId }: Props) {
                   {field.kind === "choice" && field.options && (
                     <div className="space-y-2">
                       {field.options.map((option) => {
-                        const selectedOptions = (values[field.id] ?? "")
-                          .split(", ")
-                          .filter(Boolean);
-                        const selected = selectedOptions.includes(option);
-                        // Requirement doc bagian 4.5: opsi terakhir Bermasyarakat
-                        // ("Kurang bermasyarakat") berdiri sendiri — begitu
-                        // dipilih, opsi lain ikut kehapus, dan sebaliknya.
-                        const exclusiveOption = field.options?.[field.options.length - 1];
-                        const isExclusiveOption = option === exclusiveOption && isMultiSelect;
-                        const nextValue = (() => {
-                          if (!isMultiSelect) return option;
-                          if (isExclusiveOption) return selected ? "" : option;
-                          const withoutExclusive = selectedOptions.filter(
-                            (value) => value !== exclusiveOption,
-                          );
-                          return selected
-                            ? withoutExclusive.filter((value) => value !== option).join(", ")
-                            : [...withoutExclusive, option].join(", ");
-                        })();
-
                         return (
                           <OptionButton
                             key={option}
                             label={option}
-                            selected={
-                              isMultiSelect
-                                ? selected
-                                : values[field.id] === option
-                            }
+                            selected={values[field.id] === option}
                             onClick={() =>
                               dispatch(
                                 setHabitValue({
                                   fieldId: field.id,
-                                  value: nextValue,
+                                  // Klik ulang opsi terpilih pada field opsional
+                                  // (mis. Inisiatif Olahraga) membatalkan pilihan.
+                                  value:
+                                    field.optional && values[field.id] === option
+                                      ? ""
+                                      : option,
                                 }),
                               )
                             }
