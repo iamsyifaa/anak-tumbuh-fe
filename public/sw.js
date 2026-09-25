@@ -1,4 +1,4 @@
-const VERSION = "v1";
+const VERSION = "v2";
 const STATIC_CACHE = `anaktumbuh-static-${VERSION}`;
 const RUNTIME_CACHE = `anaktumbuh-runtime-${VERSION}`;
 const OFFLINE_URL = "/offline";
@@ -9,6 +9,13 @@ const PRECACHE_URLS = [
   "/dashboard/student/recap",
   "/dashboard/student/leaderboard",
   "/dashboard/student/profile",
+  "/dashboard/student/habits/wake-up",
+  "/dashboard/student/habits/prayer",
+  "/dashboard/student/habits/sports",
+  "/dashboard/student/habits/healthy-food",
+  "/dashboard/student/habits/reading",
+  "/dashboard/student/habits/community",
+  "/dashboard/student/habits/early-sleep",
   OFFLINE_URL,
   "/icons/icon-192.png",
   "/icons/icon-512.png",
@@ -29,7 +36,17 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then(async (cache) => {
+        await Promise.all(
+          PRECACHE_URLS.map(async (url) => {
+            try {
+              await cache.add(url);
+            } catch (error) {
+              console.warn(`Precache gagal: ${url}`, error);
+            }
+          }),
+        );
+      })
       .then(() => self.skipWaiting()),
   );
 });
@@ -68,17 +85,24 @@ const putInCache = async (cacheName, request, response) => {
   await cache.put(request, response.clone());
 };
 
+const findCachedNavigation = async (request) => {
+  const exact = await caches.match(request);
+  if (exact) return exact;
+
+  const url = new URL(request.url);
+  return (
+    (await caches.match(url.pathname)) ||
+    (await caches.match(OFFLINE_URL))
+  );
+};
+
 const handleNavigation = async (request) => {
   try {
     const response = await fetch(request);
     await putInCache(RUNTIME_CACHE, request, response);
     return response;
   } catch {
-    return (
-      (await caches.match(request)) ||
-      (await caches.match(new URL(request.url).pathname)) ||
-      (await caches.match(OFFLINE_URL))
-    );
+    return findCachedNavigation(request);
   }
 };
 

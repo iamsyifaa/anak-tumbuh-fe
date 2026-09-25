@@ -14,25 +14,29 @@ function HabitGuideModal({ habitTitle, guideHtml, onClose }: Props) {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
+
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#17204E]/50 p-4 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-[#17204E]/50 p-2.5 backdrop-blur-sm animate-fade-in sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Panduan pengisian ${habitTitle}`}
       onClick={onClose}
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-5 text-left shadow-2xl animate-zoom-in sm:p-6"
+        className="flex max-h-[calc(100dvh-92px)] w-full max-w-md flex-col overflow-hidden rounded-[26px] bg-white p-4 text-left shadow-2xl animate-zoom-in sm:max-h-[85vh] sm:rounded-3xl sm:p-6"
       >
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <div>
-            <p className="text-sm font-black uppercase tracking-wider text-[#2F6FED]">
+        <div className="mb-2 flex shrink-0 items-start justify-between gap-3 sm:mb-3">
+          <div className="min-w-0">
+            <p className="text-xs font-black uppercase tracking-wider text-[#2F6FED] sm:text-sm">
               Panduan Pengisian
             </p>
-            <p className="text-base font-black text-[#17204E] sm:text-lg">
+            <p className="mt-0.5 truncate text-base font-black text-[#17204E] sm:text-lg">
               {habitTitle}
             </p>
           </div>
@@ -42,12 +46,12 @@ function HabitGuideModal({ habitTitle, guideHtml, onClose }: Props) {
             aria-label="Tutup panduan"
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
           >
-            <HiXMark className="h-4.5 w-4.5" />
+            <HiXMark className="h-5 w-5" />
           </button>
         </div>
 
         <div
-          className="guide-content text-sm leading-5 text-slate-600 sm:text-sm"
+          className="guide-content min-h-0 flex-1 overflow-y-auto pr-1 text-[12px] leading-[1.45] text-slate-600 sm:text-sm sm:leading-5"
           dangerouslySetInnerHTML={{ __html: guideHtml }}
         />
       </div>

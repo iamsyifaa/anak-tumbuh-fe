@@ -28,8 +28,15 @@ a { text-decoration: none; }
 .animate-fade-in { animation: fade-in 0.18s ease-out; }
 .animate-zoom-in { animation: zoom-in 0.18s ease-out; }
 
-.guide-content p { margin: 0 0 10px; }
-.guide-content h4 { margin: 14px 0 6px; font-size: 13px; font-weight: 900; color: #17204E; text-transform: uppercase; letter-spacing: 0.04em; }
-.guide-content ul { margin: 0 0 10px; padding-left: 16px; list-style: disc; }
-.guide-content li { margin-bottom: 6px; }
+.guide-content { overflow-wrap: anywhere; }
+.guide-content p { margin: 0 0 8px; }
+.guide-content h4 { margin: 10px 0 5px; font-size: 12px; line-height: 1.25; font-weight: 900; color: #17204E; text-transform: uppercase; letter-spacing: 0.035em; }
+.guide-content ul { margin: 0 0 8px; padding-left: 14px; list-style: disc; }
+.guide-content li { margin-bottom: 4px; padding-left: 1px; }
 .guide-content strong { color: #17204E; font-weight: 800; }
+@media (min-width: 640px) {
+  .guide-content p { margin-bottom: 10px; }
+  .guide-content h4 { margin: 14px 0 6px; font-size: 13px; }
+  .guide-content ul { margin-bottom: 10px; padding-left: 16px; }
+  .guide-content li { margin-bottom: 6px; }
+}

@@ -59,6 +59,7 @@ function StudentProfileContent() {
             alt={student.name}
             width={110}
             height={110}
+            priority
             className="mx-auto h-24 w-24 rounded-full object-cover ring-4 ring-[#DDEBFF] sm:h-28 sm:w-28"
           />
           <h2 className="mt-3 text-2xl font-black sm:text-3xl">
